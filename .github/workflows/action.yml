@@ -1,7 +1,7 @@
 # 워크플로우 -> 자동화 할 작업의 설계서 -> action.yml
 #
 
-name: first workflow
+name: second workflow
 on: push # 이벤트 트리거
 jobs: # jobs:
   hello_world: # job의 이름
