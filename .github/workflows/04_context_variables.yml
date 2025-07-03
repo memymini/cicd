@@ -1,0 +1,34 @@
+name: GitHub Actions Context Variables
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Printing basic context
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Event: ${{ github.event_name}}"
+          echo "Actor: ${{ github.actor}}"
+
+      - name: Acting differenct actions
+        if: github.ref_name == 'main'
+        run: echo "Production 배포 준비"
+
+      - name: Handle PR
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "PR Title: ${{ github.pull_request.title }}"
+          echo "PR Number: ${{ github.pull_request.number }}"
+          echo "PR Author${{ github.pull_request.user.login }}"
+          echo "PR State: ${{ github.pull_request.state}}"
